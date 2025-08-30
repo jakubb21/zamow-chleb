@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zamów Chleb</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f5f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    h1 {
+      color: #5a3825;
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #8b5e3c;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #6e4630;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🍞 Zamów swój chleb</h1>
+    <p>Wpisz poniżej swoje zamówienie, a my je przygotujemy i dowieziemy na rynek.</p>
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <input type="text" name="name" placeholder="Twoje imię" required>
+      <input type="text" name="phone" placeholder="Numer telefonu" required>
+      <textarea name="order" rows="4" placeholder="Napisz jakie pieczywo chcesz" required></textarea>
+      <button type="submit">Wyślij zamówienie</button>
+    </form>
+  </div>
+</body>
+</html>
