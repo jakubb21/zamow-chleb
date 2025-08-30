@@ -8,52 +8,138 @@
     body {
       font-family: Arial, sans-serif;
       background: #f8f5f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background: #8b5e3c;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    header h1 {
       margin: 0;
     }
     .container {
-      background: white;
+      width: 90%;
+      max-width: 900px;
+      margin: 20px auto;
       padding: 20px;
+      background: white;
       border-radius: 15px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
     }
-    h1 {
+    h2 {
       color: #5a3825;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
     }
-    input, textarea, button {
+    .menu ul {
+      list-style: none;
+      padding: 0;
+    }
+    .menu li {
+      padding: 5px 0;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
+    }
+    form input, form textarea, form button {
       width: 100%;
       padding: 10px;
       margin: 8px 0;
       border-radius: 8px;
       border: 1px solid #ccc;
     }
-    button {
+    form button {
       background: #8b5e3c;
       color: white;
       font-weight: bold;
       cursor: pointer;
     }
-    button:hover {
+    form button:hover {
       background: #6e4630;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #eee;
+      margin-top: 30px;
+    }
+    .success {
+      display: none;
+      color: green;
+      font-weight: bold;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>🍞 Zamów Chleb Online</h1>
+    <p>Świeże pieczywo prosto z piekarni – dowóz na rynek</p>
+  </header>
+
   <div class="container">
-    <h1>🍞 Zamów swój chleb</h1>
-    <p>Wpisz poniżej swoje zamówienie, a my je przygotujemy i dowieziemy na rynek.</p>
-    <form action="https://formspree.io/f/mdklerka" method="POST">
+    <h2>🥐 O nas</h2>
+    <p>Od lat pieczemy tradycyjne pieczywo na naturalnym zakwasie. Nasz chleb nie zawiera sztucznych dodatków.</p>
+  </div>
+
+  <div class="container menu">
+    <h2>🥖 Nasze pieczywo</h2>
+    <ul>
+      <li><span>Chleb wiejski</span> <span>6 zł</span></li>
+      <li><span>Chleb żytni</span> <span>7 zł</span></li>
+      <li><span>Chleb razowy</span> <span>7 zł</span></li>
+      <li><span>Bułki pszenne (4 szt.)</span> <span>3 zł</span></li>
+      <li><span>Chałka</span> <span>8 zł</span></li>
+    </ul>
+  </div>
+
+  <div class="container">
+    <h2>📩 Zamówienie</h2>
+    <p>Zamów dziś do 20:00, a odbierzesz jutro na rynku.</p>
+    <form id="orderForm" action="https://formspree.io/f/mdklerka" method="POST">
       <input type="text" name="name" placeholder="Twoje imię" required>
       <input type="text" name="phone" placeholder="Numer telefonu" required>
       <textarea name="order" rows="4" placeholder="Napisz jakie pieczywo chcesz" required></textarea>
       <button type="submit">Wyślij zamówienie</button>
+      <p class="success" id="successMessage">✅ Dziękujemy! Twoje zamówienie zostało wysłane.</p>
     </form>
   </div>
+
+  <div class="container">
+    <h2>📞 Kontakt</h2>
+    <p>Telefon: <strong>123 456 789</strong></p>
+    <p>Email: <strong>kontakt@zamowchleb.com</strong></p>
+    <p>Miejsce odbioru: Rynek Główny</p>
+  </div>
+
+  <footer>
+    &copy; 2025 ZamówChleb.com – Wszystkie prawa zastrzeżone
+  </footer>
+
+  <script>
+    // Pokazanie komunikatu po wysłaniu formularza
+    const form = document.getElementById('orderForm');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (response.ok) {
+        successMessage.style.display = 'block';
+        form.reset();
+      } else {
+        alert("❌ Coś poszło nie tak. Spróbuj ponownie.");
+      }
+    });
+  </script>
 </body>
 </html>
